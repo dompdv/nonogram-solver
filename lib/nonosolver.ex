@@ -1,4 +1,8 @@
 defmodule Nonosolver do
+  # Solves a Nonogram
+  # Size = length of the square
+  # Board = the current status of the board : 1 for an occupied cell, -1 for an unoccupied cell, 0 for unknown
+  # Clues = liste de {:row ou :col, numéro de la ligne ou de la colonne (de 0 à size-1), [groupes]}. Exemple [{:row, 2, [1,3]}]
   def launch_solve(size, matrix, clues) do
     board = matrix_to_map(matrix)
     possibilities = precompute_clue_possibilities(size)
@@ -13,11 +17,11 @@ defmodule Nonosolver do
   def solve(size, possibilities, board, [], archived_clues),
     do: solve(size, possibilities, board, Enum.reverse(archived_clues), [])
 
-  # Solves a Nonogram
+  # Actually solves a Nonogram
   # Size = length of the square
   # Possibilities = the precomputed possibility list per Groups
   # Board = the current status of the board : 1 for an occupied cell, -1 for an unoccupied cell, 0 for unknown
-  # Clies = liste de {:row ou :col, numéro de la ligne ou de la colonne (de 0 à size-1), [groupes]}. Exemple [{:row, 2, [1,3]}]
+  # Clues = liste de {:row ou :col, numéro de la ligne ou de la colonne (de 0 à size-1), [groupes]}. Exemple [{:row, 2, [1,3]}]
   # Archieved_clues = sert d'accumumateur à Clues déjà passées en revue, et qui ne permettent pas de conclure sur la ligne ou la colonne
   def solve(
         size,
