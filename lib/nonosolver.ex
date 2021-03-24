@@ -1,7 +1,7 @@
 defmodule Nonosolver do
   # Solves a Nonogram
   # Size = length of the square
-  # Board = the current status of the board : 1 for an occupied cell, -1 for an unoccupied cell, 0 for unknown
+  # Board = list of list [the current status of the board : 1 for an occupied cell, -1 for an unoccupied cell, 0 for unknown]
   # Clues = liste de {:row ou :col, numéro de la ligne ou de la colonne (de 0 à size-1), [groupes]}. Exemple [{:row, 2, [1,3]}]
   def launch_solve(size, matrix, clues) do
     board = matrix_to_map(matrix)
@@ -20,7 +20,7 @@ defmodule Nonosolver do
   # Actually solves a Nonogram
   # Size = length of the square
   # Possibilities = the precomputed possibility list per Groups
-  # Board = the current status of the board : 1 for an occupied cell, -1 for an unoccupied cell, 0 for unknown
+  # Board = map of the current status of the board : 1 for an occupied cell, -1 for an unoccupied cell, 0 for unknown
   # Clues = liste de {:row ou :col, numéro de la ligne ou de la colonne (de 0 à size-1), [groupes]}. Exemple [{:row, 2, [1,3]}]
   # Archieved_clues = sert d'accumumateur à Clues déjà passées en revue, et qui ne permettent pas de conclure sur la ligne ou la colonne
   def solve(
@@ -100,7 +100,7 @@ defmodule Nonosolver do
     |> Enum.chunk_every(size)
   end
 
-  # L'idée est de caculer toutes les possibilités correspondant à un liste de groupes
+  # L'idée est de calculer toutes les possibilités correspondant à un liste de groupes
   # Par exemple, pour une ligne de 5,
   # un ensemble de type [1, 3] va donner [1, 0, 1, 1, 1] obligatoirement
   # tandis que [1, 1] va donner [1, 1, 0, 0], [1, 0, 1, 0], [1, 0, 0, 1], [0, 1, 1, 0], [0, 1, 0, 1], [0, 0, 1, 1]
