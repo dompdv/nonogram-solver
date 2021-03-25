@@ -103,7 +103,7 @@ defmodule Nonosolver do
   # L'idée est de calculer toutes les possibilités correspondant à un liste de groupes
   # Par exemple, pour une ligne de 5,
   # un ensemble de type [1, 3] va donner [1, 0, 1, 1, 1] obligatoirement
-  # tandis que [1, 1] va donner [1, 1, 0, 0], [1, 0, 1, 0], [1, 0, 0, 1], [0, 1, 1, 0], [0, 1, 0, 1], [0, 0, 1, 1]
+  # tandis que [1, 1] va donner [1, 0, 1, 0], [1, 0, 0, 1], [0, 1, 0, 1]
   def precompute_clue_possibilities(square_size) do
     # L'astuce est de faire les choses à l'envers: on va regarder la représentation binaire de tous les nombre de 0 à 2^n-1
     # et, pour chaque nombre, compter les groupes
